@@ -21,7 +21,7 @@ jobs:
         password: Missudadi@@1
 
     - name: Build Docker Image
-      run: docker build -t cicd-pipeline .
+      run: docker build -t shubham11196/cicd-pipeline .
 
     - name: Push to Docker Hub
-      run: docker push cicd-pipeline:latest
+      run: docker push shubham11196/cicd-pipeline:latest
