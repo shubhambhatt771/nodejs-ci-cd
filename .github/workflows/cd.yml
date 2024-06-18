@@ -1,0 +1,29 @@
+name: CD Pipeline
+
+on:
+  workflow_run:
+    workflows: ["CI Pipeline"]
+    types:
+        - completed
+
+jobs:
+
+  build:
+
+    runs-on: self-hosted
+
+    steps:
+    - name: Login Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: shubham11196
+        password: Missudadi@@1
+
+    - name: Pull Docker Image
+      run: docker pull shubham11196/cicd-pipeline:latest
+
+    - name: Remove Old docker container
+      run: docker rm -f cicd-pipeline-container || true
+
+    - name: Run Docker Container
+      run: docker run -d -p 4000:4000 --name cicd-pipeline-container shubham11196/cicd-pipeline
